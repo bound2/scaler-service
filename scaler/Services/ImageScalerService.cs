@@ -17,13 +17,9 @@ namespace scaler.Services
         {
             using var stream = client.OpenRead(url);
 
-            VOption kwargs = new VOption();
-            kwargs.Add("n", -1); // Required for animated images
-
             using var image = Image.NewFromStream(
                 stream,
-                access: Enums.Access.Random,
-                kwargs: kwargs
+                access: Enums.Access.Random
             );
 
             var format = getImageFormat(image.Get("vips-loader").ToString());
