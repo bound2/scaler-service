@@ -1,4 +1,4 @@
-<h1 align="center">scaler-service</div>
+<h1 align="center">scaler-service</h1>
 Web-server built on AspNetCore. POC implementation of libvips image scaler.
 
 ## Usage docker
