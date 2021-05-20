@@ -23,6 +23,7 @@ namespace scaler.Services
             var largeImage = image.Resize(0.75);
 
             // TODO upload to Minio / S3 instead and return in API
+            // TODO support HEIC and HEIF
             var filename = Guid.NewGuid().ToString();;
             smallImage.WriteToFile($"output/${filename}-s.jpg");
             mediumImage.WriteToFile($"output/${filename}-m.jpg");
