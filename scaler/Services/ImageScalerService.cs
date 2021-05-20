@@ -16,19 +16,37 @@ namespace scaler.Services
         public void Scale(string url)
         {
             using var stream = client.OpenRead(url);
-            using var image = Image.NewFromStream(stream, access: Enums.Access.Random);
 
-            var smallImage = image.Resize(0.25);
-            var mediumImage = image.Resize(0.5);
-            var largeImage = image.Resize(0.75);
+            using var image = Image.NewFromStream(
+                stream,
+                access: Enums.Access.Random
+            );
+
+            var format = getImageFormat(image.Get("vips-loader").ToString());
+
+            using var smallImage = image.Resize(0.25);
+            using var mediumImage = image.Resize(0.5);
+            using var largeImage = image.Resize(0.75);
 
             // TODO upload to Minio / S3 instead and return in API
-            // TODO support HEIC and HEIF
             var filename = Guid.NewGuid().ToString();;
-            smallImage.WriteToFile($"output/${filename}-s.jpg");
-            mediumImage.WriteToFile($"output/${filename}-m.jpg");
-            largeImage.WriteToFile($"output/${filename}-l.jpg");
-            image.WriteToFile($"output/${filename}.jpg");
+            smallImage.WriteToFile($"output/{filename}-s.{format}");
+            mediumImage.WriteToFile($"output/{filename}-m.{format}");
+            largeImage.WriteToFile($"output/{filename}-l.{format}");
+            image.WriteToFile($"output/{filename}.{format}");
+        }
+
+        private string getImageFormat(string loader)
+        {
+            return loader switch
+            {
+                "jpegload_source" => "jpg",
+                "heifload_source" => "heif",
+                "pngload_source" => "png",
+                "gifload_source" => "gif",
+                "webpload_source" => "webp",
+                _ => throw new Exception($"Unknown image loader: {loader}"),
+            };
         }
     }
 }
