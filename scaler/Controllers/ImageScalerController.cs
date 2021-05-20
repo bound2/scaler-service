@@ -14,11 +14,11 @@ namespace scaler.Controllers
     public class ImageScalerController : ControllerBase
     {
 
-        private readonly ILogger<WeatherForecastController> _logger;
+        private readonly ILogger<ImageScalerController> _logger;
         private readonly ImageScalerService _imageScalerService;
 
         public ImageScalerController(
-            ILogger<WeatherForecastController> logger,
+            ILogger<ImageScalerController> logger,
             ImageScalerService imageScalerService
         )
         {
