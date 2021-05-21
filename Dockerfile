@@ -1,5 +1,5 @@
 ﻿# STAGE - build base image with libvips compilation
-FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS base
+FROM mcr.microsoft.com/dotnet/aspnet:5.0-focal AS base
 
 RUN apt-get update 
 RUN apt-get install -y \
@@ -13,19 +13,19 @@ RUN apt-get install -y \
 	glib-2.0-dev \
 	liblcms2-dev \
 	libexpat-dev \
+	libexif-dev \
+	liblcms2-dev \
+	libjpeg-dev \
 	librsvg2-dev \
 	libpng-dev \
 	libgif-dev \
-	libtiff5-dev \
-	libjpeg-dev \
+	libtiff-dev \
 	libgsf-1-dev \
-	libexif-dev \
-	liblcms2-dev \
-	libheif-dev \
-	liborc-dev \
 	libx265-dev \
 	libde265-dev \
-	libaom-dev
+	libaom-dev \
+	libheif-dev \
+	liborc-dev
 
 ARG VIPS_VERSION=8.10.6
 ARG VIPS_URL=https://github.com/libvips/libvips/releases/download
