@@ -29,7 +29,7 @@ namespace scaler.Services
             using var largeImage = image.Resize(0.75);
 
             // TODO upload to Minio / S3 instead and return in API
-            var filename = Guid.NewGuid().ToString();;
+            var filename = Guid.NewGuid().ToString();
             smallImage.WriteToFile($"output/{filename}-s.{format}");
             mediumImage.WriteToFile($"output/{filename}-m.{format}");
             largeImage.WriteToFile($"output/{filename}-l.{format}");
