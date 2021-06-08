@@ -35,7 +35,7 @@ WORKDIR /usr/local/src
 RUN wget ${VIPS_URL}/v${VIPS_VERSION}/vips-${VIPS_VERSION}.tar.gz \
 	&& tar xzf vips-${VIPS_VERSION}.tar.gz \
 	&& cd vips-${VIPS_VERSION} \
-	&& ./configure \
+	&& ./configure --with-hevc \
 	&& make V=0 \
 	&& make install \
 	&& ldconfig
