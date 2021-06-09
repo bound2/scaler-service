@@ -44,6 +44,7 @@ namespace scaler.Services
                 "heifload_source" => "heif",
                 "pngload_source" => "png",
                 "gifload_source" => "gif",
+                "tiffload_source" => "tiff",
                 "webpload_source" => "webp",
                 _ => throw new Exception($"Unknown image loader: {loader}"),
             };

@@ -11,11 +11,11 @@ RUN apt-get install -y \
 # libvips dependencies
 RUN apt-get install -y \
 	glib-2.0-dev \
-	liblcms2-dev \
 	libexpat-dev \
+	imagemagick \
 	libexif-dev \
 	liblcms2-dev \
-	libjpeg-dev \
+	libjpeg-turbo8-dev \
 	librsvg2-dev \
 	libpng-dev \
 	libgif-dev \
@@ -25,7 +25,11 @@ RUN apt-get install -y \
 	libde265-dev \
 	libaom-dev \
 	libheif-dev \
-	liborc-dev
+	liborc-dev \
+	libcairo2-dev \
+	libimagequant-dev \
+	libwebp-dev \
+	libnifti-dev
 
 ARG VIPS_VERSION=8.10.6
 ARG VIPS_URL=https://github.com/libvips/libvips/releases/download
@@ -35,7 +39,7 @@ WORKDIR /usr/local/src
 RUN wget ${VIPS_URL}/v${VIPS_VERSION}/vips-${VIPS_VERSION}.tar.gz \
 	&& tar xzf vips-${VIPS_VERSION}.tar.gz \
 	&& cd vips-${VIPS_VERSION} \
-	&& ./configure --with-hevc \
+	&& ./configure --with-hevc --without-mozjpeg \
 	&& make V=0 \
 	&& make install \
 	&& ldconfig
